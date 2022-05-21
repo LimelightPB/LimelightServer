@@ -10,13 +10,11 @@ import java.io.File;
 
 @Configuration
 @EnableFilesystemStores
-@Import(org.springframework.content.rest.config.RestConfiguration.class)
+//@Import(org.springframework.content.rest.config.RestConfiguration.class)
 public class ImageStoreConfig {
     @Bean
     FileSystemResourceLoader fileSystemResourceLoader() {
         return new FileSystemResourceLoader(
                 new File(System.getProperty("user.home") + "/limelight/images").getAbsolutePath());
     }
-
-
 }

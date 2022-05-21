@@ -11,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -22,8 +23,8 @@ public class Image {
     @Column(name = "id", nullable = false)
     @GeneratedValue
     private Long id;
-    private String name;
-    private Date creationTime = new Date();
+
+    private LocalDateTime creationTime = LocalDateTime.now();
 
     @ContentId private String contentId;
     @ContentLength private Long contentLength;
