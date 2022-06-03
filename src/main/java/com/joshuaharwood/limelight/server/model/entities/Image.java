@@ -1,4 +1,4 @@
-package com.joshuaharwood.limelight.server;
+package com.joshuaharwood.limelight.server.model.entities;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +22,7 @@ public class Image {
     private Long id;
 
     private LocalDateTime creationTime;
+    private LocalDateTime setTime;
 
     // Spring Content Metadata
     @ContentId
