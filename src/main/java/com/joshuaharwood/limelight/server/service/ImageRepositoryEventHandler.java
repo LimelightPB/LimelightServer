@@ -1,6 +1,7 @@
 package com.joshuaharwood.limelight.server.service;
 
 import com.joshuaharwood.limelight.server.model.entities.Image;
+import org.springframework.content.commons.annotations.HandleAfterGetContent;
 import org.springframework.data.rest.core.annotation.HandleAfterCreate;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,11 @@ public class ImageRepositoryEventHandler {
     @HandleAfterCreate
     private void afterCreate(Image image) {
         logger.info(String.format("Image SET complete [ID: %d]", image.getId()));
+    }
+
+    @HandleAfterGetContent
+    private void afterGet(Image image) {
+        logger.info(String.format("Image GET complete [ID: %d]", image.getId()));
     }
 
     @PostConstruct

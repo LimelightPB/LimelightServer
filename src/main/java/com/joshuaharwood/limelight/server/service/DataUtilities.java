@@ -14,7 +14,7 @@ public class DataUtilities {
      *
      * <p>Credits to <a href="https://programming.guide/java/formatting-byte-size-to-human-readable-format.html">...</a></p>
      */
-    public static String humanReadableByteCountBin(long bytes) {
+    public static String humanReadableByteCount(long bytes) {
         long absB = bytes == Long.MIN_VALUE ? Long.MAX_VALUE : Math.abs(bytes);
         if (absB < 1024) {
             return bytes + " B";

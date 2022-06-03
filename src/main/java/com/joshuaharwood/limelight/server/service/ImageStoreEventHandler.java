@@ -1,8 +1,6 @@
 package com.joshuaharwood.limelight.server.service;
 
 import com.joshuaharwood.limelight.server.model.entities.Image;
-import com.joshuaharwood.limelight.server.model.repositories.ImageRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.content.commons.annotations.HandleAfterGetContent;
 import org.springframework.content.commons.annotations.HandleAfterSetContent;
 import org.springframework.content.commons.annotations.StoreEventHandler;
@@ -17,21 +15,15 @@ import java.util.logging.Logger;
 public class ImageStoreEventHandler {
     private static final Logger logger =
             Logger.getLogger(ImageStoreEventHandler.class.getName());
-    private final ImageRepository imageRepository;
-
-    @Autowired
-    public ImageStoreEventHandler(ImageRepository imageRepository) {
-        this.imageRepository = imageRepository;
-    }
 
     @HandleAfterSetContent
     private void afterSetImage(Image image) {
         image.setSetTime(LocalDateTime.now());
 
         logger.info(
-                String.format("Image PUT complete [ID: %d] [Size: %s]",
-                    image.getId(),
-                    DataUtilities.humanReadableByteCountBin(image.getContentLength())
+                String.format("Image content PUT complete [ID: %d] [Size: %s]",
+                        image.getId(),
+                        DataUtilities.humanReadableByteCount(image.getContentLength())
                 )
         );
     }
@@ -39,9 +31,9 @@ public class ImageStoreEventHandler {
     @HandleAfterGetContent
     private void afterGetImage(Image image) {
         logger.info(
-                String.format("Image GET complete [ID: %d] [Size: %s]",
+                String.format("Image content GET complete [ID: %d] [Size: %s]",
                         image.getId(),
-                        DataUtilities.humanReadableByteCountBin(image.getContentLength())
+                        DataUtilities.humanReadableByteCount(image.getContentLength())
                 )
         );
     }
@@ -50,5 +42,4 @@ public class ImageStoreEventHandler {
     private void postConstruct() {
         logger.info("Initialised ImageStoreEventHandler service");
     }
-
 }

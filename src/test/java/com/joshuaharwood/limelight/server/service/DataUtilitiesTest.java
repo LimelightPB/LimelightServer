@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class DataUtilitiesTest {
 
     @Test
-    void humanReadableByteCountBin() {
-        assertEquals("1.21 MiB", DataUtilities.humanReadableByteCountBin(1264083));
+    void humanReadableByteCount() {
+        assertEquals("1.21 MiB", DataUtilities.humanReadableByteCount(1264083));
     }
 }
