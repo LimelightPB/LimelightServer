@@ -1,8 +1,7 @@
-package com.joshuaharwood.limelight.server.service;
+package com.joshuaharwood.limelight.server.service.rest;
 
 import com.joshuaharwood.limelight.server.model.entities.Image;
-import org.springframework.content.commons.annotations.HandleAfterGetContent;
-import org.springframework.content.commons.annotations.HandleAfterGetResource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.core.annotation.HandleAfterCreate;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 import org.springframework.stereotype.Service;
@@ -13,22 +12,25 @@ import java.util.logging.Logger;
 @Service
 @RepositoryEventHandler
 public class ImageRepositoryEventHandler {
-    private static final Logger logger = Logger.getLogger(ImageRepositoryEventHandler.class.getName());
+    private final RestLogger restLogger;
 
-    @org.springframework.data.rest.core.annotation.
+    @Autowired
+    public ImageRepositoryEventHandler(RestLogger restLogger) {
+        this.restLogger = restLogger;
+    }
 
     @HandleAfterCreate
     private void afterCreate(Image image) {
-        logger.info(String.format("Image entity POST complete [ID: %d]", image.getId()));
+        restLogger.logLastRequest();
     }
 
-    @HandleAfterGetResource
-    private void afterGet(Image image) {
-        logger.info(String.format("Image entity GET complete [ID: %d]", image.getId()));
-    }
+//    No annotation for this. Will research later
+//    private void afterGet(Image image) {
+//        logger.info(String.format("Image entity GET complete [ID: %d]", image.getId()));
+//    }
 
     @PostConstruct
     private void postConstruct() {
-        logger.info("Initialised ImageRepositoryEventHandler service");
+        restLogger.log("Initialised ImageRepositoryEventHandler service");
     }
 }

@@ -1,5 +1,8 @@
 package com.joshuaharwood.limelight.server.service;
 
+import com.joshuaharwood.limelight.server.model.repositories.ImageRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 
