@@ -4,19 +4,49 @@
  * Proprietary - not to be distributed or modified without permission.
  */
 
-package com.joshuaharwood.limelight.server.service.utils;
+package com.joshuaharwood.limelight.server.service.logic;
 
+import com.joshuaharwood.limelight.server.model.entities.Image;
 import com.joshuaharwood.limelight.server.model.repositories.ImageRepository;
+import com.joshuaharwood.limelight.server.model.stores.ImageStore;
+import com.joshuaharwood.limelight.server.service.utils.DataUtilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 @Service
 public class ImageServiceImpl implements ImageService {
     private final ImageRepository imageRepository;
+    private final ImageStore imageStore;
 
     @Autowired
-    public ImageServiceImpl(ImageRepository imageRepository) {
+    public ImageServiceImpl(ImageRepository imageRepository, ImageStore imageStore) {
         this.imageRepository = imageRepository;
+        this.imageStore = imageStore;
+    }
+
+    // Primitive CRUD method exposures
+
+    @Override
+    public void deleteImage(Long id) {
+        imageRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteImage(Image image) {
+        imageRepository.delete(image);
+    }
+
+    @Override
+    public void deleteImageContent(Image image) {
+        imageStore.unsetContent(image);
+    }
+
+    @Override
+    public void deleteImageContent(Long id) {
+        Image i = imageRepository.getReferenceById(id);
+        imageStore.unsetContent(i);
     }
 
     /**
@@ -52,10 +82,14 @@ public class ImageServiceImpl implements ImageService {
      * @return Human-readable byte count as a String
      */
     @Override
-    public String getSizeOfImageContent() {
+    public String getHumanSizeOfImageContent() {
         return DataUtilities.humanReadableByteCount(
-                imageRepository.sumTotalImagesSize()
+                getSizeOfImageContent()
         );
+    }
+
+    private Long getSizeOfImageContent() {
+        return Objects.requireNonNullElse(imageRepository.sumTotalImagesSize(), 0L);
     }
 
     public String getImageStats() {
@@ -63,6 +97,10 @@ public class ImageServiceImpl implements ImageService {
                 getNumberOfImageEntities(),
                 getNumberOfImageEntities(true),
                 getNumberOfImageEntities(false),
-                getSizeOfImageContent());
+                getHumanSizeOfImageContent());
     }
+
+
+
+
 }

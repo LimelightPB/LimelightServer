@@ -6,19 +6,21 @@
 
 package com.joshuaharwood.limelight.server.service.shell;
 
-import com.joshuaharwood.limelight.server.service.utils.ImageService;
+import com.joshuaharwood.limelight.server.service.logic.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
 import javax.annotation.PostConstruct;
+import java.util.logging.Logger;
 
 @ShellComponent
-public class ShellService {
+public class ShellHandler {
+    private static final Logger logger = Logger.getLogger(ShellHandler.class.getName());
     private final ImageService imageService;
 
     @Autowired
-    public ShellService(ImageService imageService) {
+    public ShellHandler(ImageService imageService) {
         this.imageService = imageService;
     }
 
@@ -27,8 +29,14 @@ public class ShellService {
         return imageService.getImageStats();
     }
 
+    @ShellMethod("Delete an Image entity from the database")
+    public String deleteImageById(Long id) {
+        imageService.deleteImage(id);
+        return imageService.getImageStats();
+    }
+
     @PostConstruct
     public void postConstruct() {
-
+        logger.info("Initialised ShellHandler service");
     }
 }

@@ -10,3 +10,12 @@
 1654872562894:image-stats
 1654872955423:commands
 1654872957794:help
+1654874897990:delete-image-by-id
+1654874903965:delete-image-by-id 0
+1654874912849:delele-image-by-id 1
+1654874933755:delete-image-by-id 1
+1654875351437:stacktrace
+1654875491270:help
+1654875493655:image-stats
+1654875511711:delete-image-by-id 1
+1654875520383:delete-image-by-id 2

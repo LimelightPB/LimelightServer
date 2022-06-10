@@ -6,7 +6,7 @@
 
 package com.joshuaharwood.limelight.server;
 
-import com.joshuaharwood.limelight.server.service.utils.ImageService;
+import com.joshuaharwood.limelight.server.service.logic.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -33,6 +33,6 @@ public class LimelightServerApplication {
      */
     @PostConstruct
     public void postConstruct() {
-        logger.info(imageService.getImageStats());
+        logger.info("Image stats: " + imageService.getImageStats());
     }
 }

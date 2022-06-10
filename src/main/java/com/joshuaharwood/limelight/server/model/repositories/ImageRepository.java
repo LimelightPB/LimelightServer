@@ -15,7 +15,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface ImageRepository extends JpaRepository<Image, Long> {
     @Query(value = "SELECT sum(i.contentLength) from Image i")
     Long sumTotalImagesSize();
-
     long countByContentIdIsNotNull();
     long countByContentIdIsNull();
 }
