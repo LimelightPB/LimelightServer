@@ -33,7 +33,7 @@ public class ImageController {
     @RequestMapping("/images/size")
     private Long getTotalSizeOfImages() {
         restLogger.logLastRequest();
-        return imageRepository.totalImageSizeBytes();
+        return imageRepository.sumTotalImagesSize();
     }
 
     @PostConstruct

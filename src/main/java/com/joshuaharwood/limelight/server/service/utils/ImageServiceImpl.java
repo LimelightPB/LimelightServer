@@ -19,12 +19,50 @@ public class ImageServiceImpl implements ImageService {
         this.imageRepository = imageRepository;
     }
 
-    public Long getNumberOfImages() {
+    /**
+     * Returns a count of JPA Image entities in the database, regardless of
+     * whether content is associated with that entity.
+     *
+     * @return Count of Image entities
+     */
+    public Long getNumberOfImageEntities() {
         return imageRepository.count();
     }
 
+    /**
+     * Returns a count of JPA Image entities in the database, depending on
+     * whether they have content associated with them or not.
+     *
+     * @param hasContent Whether counted entities should have associated content
+     * @return Count of specified Image entities
+     */
     @Override
-    public String getSizeOfImages() {
-        return DataUtilities.humanReadableByteCount(imageRepository.totalImageSizeBytes());
+    public Long getNumberOfImageEntities(boolean hasContent) {
+        if (hasContent) {
+            return imageRepository.countByContentIdIsNotNull();
+        } else {
+            return imageRepository.countByContentIdIsNull();
+        }
+    }
+
+    /**
+     * Returns a human-readable binary sum of the content lengths of each Image
+     * entity in the database (/1024).
+     *
+     * @return Human-readable byte count as a String
+     */
+    @Override
+    public String getSizeOfImageContent() {
+        return DataUtilities.humanReadableByteCount(
+                imageRepository.sumTotalImagesSize()
+        );
+    }
+
+    public String getImageStats() {
+        return String.format("Image stats: [Total: %d] [With content: %d] [No content: %d] [Size: %s]",
+                getNumberOfImageEntities(),
+                getNumberOfImageEntities(true),
+                getNumberOfImageEntities(false),
+                getSizeOfImageContent());
     }
 }

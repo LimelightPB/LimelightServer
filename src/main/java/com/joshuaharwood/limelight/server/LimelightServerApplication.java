@@ -33,15 +33,6 @@ public class LimelightServerApplication {
      */
     @PostConstruct
     public void postConstruct() {
-        logger.info(
-                String.format("Total image entities in database: %d",
-                        imageService.getNumberOfImages()
-                )
-        );
-
-        logger.info(
-                String.format("Total size of images in collection: %s",
-                        imageService.getSizeOfImages())
-        );
+        logger.info(imageService.getImageStats());
     }
 }

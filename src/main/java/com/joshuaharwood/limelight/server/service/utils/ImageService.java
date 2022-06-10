@@ -7,6 +7,8 @@
 package com.joshuaharwood.limelight.server.service.utils;
 
 public interface ImageService {
-    Long getNumberOfImages();
-    String getSizeOfImages();
+    Long getNumberOfImageEntities();
+    Long getNumberOfImageEntities(boolean withContent);
+    String getSizeOfImageContent();
+    public String getImageStats();
 }
