@@ -59,7 +59,7 @@ public class ImageServiceImpl implements ImageService {
     }
 
     public String getImageStats() {
-        return String.format("Image stats: [Total: %d] [With content: %d] [No content: %d] [Size: %s]",
+        return String.format("[Total: %d] [With content: %d] [Without content: %d] [Total size: %s]",
                 getNumberOfImageEntities(),
                 getNumberOfImageEntities(true),
                 getNumberOfImageEntities(false),

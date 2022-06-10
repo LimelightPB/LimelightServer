@@ -10,5 +10,5 @@ public interface ImageService {
     Long getNumberOfImageEntities();
     Long getNumberOfImageEntities(boolean withContent);
     String getSizeOfImageContent();
-    public String getImageStats();
+    String getImageStats();
 }
