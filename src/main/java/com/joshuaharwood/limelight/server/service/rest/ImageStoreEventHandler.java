@@ -1,7 +1,12 @@
+/*
+ * Copyright (c) 2022 Joshua J. A. Harwood.
+ *
+ * Proprietary - not to be distributed or modified without permission.
+ */
+
 package com.joshuaharwood.limelight.server.service.rest;
 
 import com.joshuaharwood.limelight.server.model.entities.Image;
-import com.joshuaharwood.limelight.server.service.DataUtilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.content.commons.annotations.HandleAfterGetContent;
 import org.springframework.content.commons.annotations.HandleAfterSetContent;

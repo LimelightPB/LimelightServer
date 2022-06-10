@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2022 Joshua J. A. Harwood.
+ *
+ * Proprietary - not to be distributed or modified without permission.
+ */
+
 package com.joshuaharwood.limelight.server.service.rest;
 
 import com.joshuaharwood.limelight.server.model.entities.Image;
@@ -7,7 +13,6 @@ import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.logging.Logger;
 
 @Service
 @RepositoryEventHandler

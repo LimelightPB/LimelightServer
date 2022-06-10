@@ -1,7 +1,10 @@
-package com.joshuaharwood.limelight.server.service;
+/*
+ * Copyright (c) 2022 Joshua J. A. Harwood.
+ *
+ * Proprietary - not to be distributed or modified without permission.
+ */
 
-import com.joshuaharwood.limelight.server.model.repositories.ImageRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+package com.joshuaharwood.limelight.server.service.utils;
 
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;

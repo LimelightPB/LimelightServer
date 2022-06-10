@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2022 Joshua J. A. Harwood.
+ *
+ * Proprietary - not to be distributed or modified without permission.
+ */
+
 package com.joshuaharwood.limelight.server.service.rest;
 
 import com.joshuaharwood.limelight.server.model.repositories.ImageRepository;
@@ -6,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
-import java.util.logging.Level;
 
 @RestController
 public class ImageController {
@@ -34,5 +39,6 @@ public class ImageController {
     @PostConstruct
     private void postConstruct() {
         restLogger.log("Initialised ImageController service");
+
     }
 }
