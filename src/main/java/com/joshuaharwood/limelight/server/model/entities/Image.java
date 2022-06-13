@@ -34,7 +34,7 @@ public class Image {
     @ContentId
     private String contentId;
     @ContentLength
-    private Long contentLength;
+    private Long contentLength = 0L;
     @MimeType
     private String contentMimeType = "text/plain";
 

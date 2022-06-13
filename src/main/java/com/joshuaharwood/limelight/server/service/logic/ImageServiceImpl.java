@@ -13,6 +13,7 @@ import com.joshuaharwood.limelight.server.service.utils.DataUtilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Objects;
 
 @Service
@@ -27,26 +28,36 @@ public class ImageServiceImpl implements ImageService {
     }
 
     // Primitive CRUD method exposures
-
     @Override
     public void deleteImage(Long id) {
         imageRepository.deleteById(id);
     }
 
-    @Override
-    public void deleteImage(Image image) {
-        imageRepository.delete(image);
-    }
-
-    @Override
-    public void deleteImageContent(Image image) {
-        imageStore.unsetContent(image);
-    }
-
+    @Transactional
     @Override
     public void deleteImageContent(Long id) {
-        Image i = imageRepository.getReferenceById(id);
-        imageStore.unsetContent(i);
+        if (imageExistsById(id)) {
+            Image i = imageRepository.getReferenceById(id);
+            imageStore.unsetContent(i);
+        }
+    }
+
+    @Override
+    public Image createImage() {
+        return imageRepository.save(new Image());
+    }
+
+    // Derived data methods
+
+
+    @Override
+    public boolean imageExistsById(Long id) {
+        return imageRepository.existsById(id);
+    }
+
+    @Override
+    public boolean imageHasContent(Long id) {
+        return imageRepository.existsByIdAndContentIdIsNotNull(id);
     }
 
     /**
@@ -66,6 +77,9 @@ public class ImageServiceImpl implements ImageService {
      * @param hasContent Whether counted entities should have associated content
      * @return Count of specified Image entities
      */
+
+    // TODO: ContentLength is now 0L by default. Gotta convert the repo methods
+    // from void/nonvoid...
     @Override
     public Long getNumberOfImageEntities(boolean hasContent) {
         if (hasContent) {
@@ -99,8 +113,4 @@ public class ImageServiceImpl implements ImageService {
                 getNumberOfImageEntities(false),
                 getHumanSizeOfImageContent());
     }
-
-
-
-
 }

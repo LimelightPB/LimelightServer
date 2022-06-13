@@ -16,23 +16,7 @@ import java.util.logging.Logger;
 
 @SpringBootApplication
 public class LimelightServerApplication {
-    private static final Logger logger = Logger.getLogger(LimelightServerApplication.class.getName());
-    private final ImageService imageService;
-
-    @Autowired
-    public LimelightServerApplication(ImageService imageService) {
-        this.imageService = imageService;
-    }
-
     public static void main(String[] args) {
         SpringApplication.run(LimelightServerApplication.class, args);
-    }
-
-    /**
-     * Logic run on startup.
-     */
-    @PostConstruct
-    public void postConstruct() {
-        logger.info("Image stats: " + imageService.getImageStats());
     }
 }

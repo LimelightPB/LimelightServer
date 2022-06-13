@@ -10,11 +10,14 @@ import com.joshuaharwood.limelight.server.model.entities.Image;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.content.commons.annotations.HandleAfterGetContent;
 import org.springframework.content.commons.annotations.HandleAfterSetContent;
+import org.springframework.content.commons.annotations.HandleAfterUnsetContent;
 import org.springframework.content.commons.annotations.StoreEventHandler;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
+
+//TODO: Reevaluate RestLogger...
 
 @Service
 @StoreEventHandler
@@ -30,6 +33,11 @@ public class ImageStoreEventHandler {
     private void afterSetImage(Image image) {
         image.setSetTime(LocalDateTime.now());
         restLogger.logLastRequest();
+    }
+
+    @HandleAfterUnsetContent
+    private void afterDeleteContent(Image image) {
+        image.setSetTime(null);
     }
 
     // TODO: Not firing. Why?

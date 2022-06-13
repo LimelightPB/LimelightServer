@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
 
+//TODO: Handle other request types. RequestMapping defaults to GET, ambiguous
 @RestController
 public class ImageController {
     private final ImageRepository imageRepository;

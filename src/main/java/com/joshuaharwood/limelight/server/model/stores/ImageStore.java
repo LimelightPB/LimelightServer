@@ -13,9 +13,12 @@ import org.springframework.content.fs.store.FilesystemContentStore;
 import org.springframework.content.rest.StoreRestResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.io.File;
 
+@Repository
 @StoreRestResource
 public interface ImageStore extends FilesystemContentStore<Image, String> {
     @Configuration

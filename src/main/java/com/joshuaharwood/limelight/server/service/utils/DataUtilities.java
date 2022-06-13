@@ -6,6 +6,10 @@
 
 package com.joshuaharwood.limelight.server.service.utils;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 
@@ -33,5 +37,14 @@ public class DataUtilities {
         }
         value *= Long.signum(bytes);
         return String.format("%.2f %ciB", value / 1024.0, ci.current());
+    }
+
+    public static InputStream fileToInputStream(String path) {
+        File file = new File(path);
+        try {
+            return new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

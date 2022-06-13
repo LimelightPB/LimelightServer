@@ -17,9 +17,12 @@ public interface ImageService {
     String getHumanSizeOfImageContent();
     String getImageStats();
 
+    boolean imageExistsById(Long id);
+
+    boolean imageHasContent(Long id);
 
     void deleteImage(Long id);
-    void deleteImage(Image image);
     void deleteImageContent(Long id);
-    void deleteImageContent(Image image);
+
+    Image createImage();
 }
