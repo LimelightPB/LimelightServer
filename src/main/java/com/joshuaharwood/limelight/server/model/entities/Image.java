@@ -41,4 +41,8 @@ public class Image {
     public Image() {
         creationTime = LocalDateTime.now();
     }
+
+    public boolean hasContent() {
+        return getContentId() != null;
+    }
 }

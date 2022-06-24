@@ -40,4 +40,5 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
      */
     @Query("select (count(i) > 0) from Image i where i.id = ?1 and i.contentId is not null")
     boolean existsByIdAndContentIdIsNotNull(Long id);
+
 }
